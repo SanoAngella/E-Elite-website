@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Medical - Home</title>
+    <link rel="stylesheet" href="try.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+
+</head>
+<body>
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-particle"></div>
+        <div class="loader-particle"></div>
+        <div class="loader-particle"></div>
+        <div class="loader-particle"></div>
+        
+        <div class="loader-tools">
+            <div class="tool-icon">💉</div>
+            <div class="tool-icon">🔬</div>
+            <div class="tool-icon">⚕️</div>
+        </div>
+        
+        <div class="loader-text">Loading</div>
+        <div class="loader-progress"></div>
+    </div>
+    
+    <div class="nav">    
+        <nav>
+            <a href="index.html" class="active">Home</a>
+            <a href="about.html">About</a>
+            <a href="products.html">Products</a>
+            <a href="services1.html">Services</a>
+            <a href="events.html" class="active">Events</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </div>
+
+    
+    <div class="hero-section">
+        <p id="title" class="box animation-pop animate__animated animate__bounce ">Transforming Healthcare through Advanced Medical and Surgical Solutions</p>
+        <p>Elite Medical provides a wide range of world-class medical products designed to enhance clinical performance, improve patient outcomes, and support efficient healthcare delivery. All products are sourced from trusted international manufacturers and meet global medical standards.</p>
+    </div>
+
+   
+    <div class="specialties-section">
+        <h2 class="section-title">Specialties Available</h2>
+
+        <div class="specialties-grid">
+
+            
+            <div class="specialty-card">
+                <div class="icon-container">
+                    🔪
+                </div>
+                <span class="specialty-name">Surgical Equipment</span>
+            </div>
+
+            
+            <div class="specialty-card">
+                <div class="icon-container">
+                    🔬
+                </div>
+                <span class="specialty-name">Endoscopy Systems</span>
+            </div>
+
+            
+            <div class="specialty-card">
+                <div class="icon-container">
+                    ⚕️
+                </div>
+                <span class="specialty-name">MIS Solutions</span>
+            </div>
+
+            
+            <div class="specialty-card">
+                <div class="icon-container">
+                    📦
+                </div>
+                <span class="specialty-name">Medical Consumables</span>
+            </div>
+
+            
+            <div class="specialty-card">
+                <div class="icon-container">
+                    🧪
+                </div>
+                <span class="specialty-name">Laboratory Equipment</span>
+            </div>
+
+            
+            <div class="specialty-card">
+                <div class="icon-container">
+                    🔧
+                </div>
+                <span class="specialty-name">Biomedical Services</span>
+            </div>
+
+        </div>
+    </div>
+
+
+    <script>
+        window.addEventListener('load', () => {
+            const loader = document.querySelector('.page-loader');
+            
+            // This waits 2 seconds (2000ms) then hides the loader
+            setTimeout(() => {
+                loader.classList.add('hidden');
+            }, 2000);
+        });
+    </script>
+    <footer>
+    <p>&copy; 2026 Elite Medical Ltd. All rights reserved. | Transforming Healthcare Through Advanced Medical & Surgical Solutions</p>
+
+</footer>
+
+
+</body>
+</html>

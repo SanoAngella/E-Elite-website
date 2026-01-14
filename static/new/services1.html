@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Medical - Our Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+       
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1860a0 0%, #2d9e8a 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        .page-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-tools {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .tool-icon {
+            font-size: 50px;
+            animation: tool-bounce 1.5s ease-in-out infinite;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+        }
+
+        .tool-icon:nth-child(1) { animation-delay: 0s; }
+        .tool-icon:nth-child(2) { animation-delay: 0.2s; }
+        .tool-icon:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes tool-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-25px); }
+        }
+
+        .loader-text {
+            margin-top: 20px;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* ========================================
+           NAVIGATION
+           ======================================== */
+        .nav {
+            background: white;
+            padding: 0 100px;
+            border-bottom: 2px solid #e0e0e0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            gap: 40px;
+            padding: 20px 0;
+            align-items: center;
+        }
+
+        nav a {
+            color: rgb(54, 51, 51);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: rgb(48, 118, 178);
+        }
+
+        nav a.active {
+            color: rgb(24, 96, 159);
+            font-weight: 600;
+        }
+
+      
+        .page-header {
+            background: linear-gradient(135deg, #1860a0 0%, #2d9e8a 100%);
+            padding: 100px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: float-circle 6s ease-in-out infinite;
+        }
+
+        @keyframes float-circle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-30px); }
+        }
+
+        .page-header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-header p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            color: rgba(255,255,255,0.95);
+        }
+
+      
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+       
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .section-header.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-header h2 {
+            font-size: 40px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            font-size: 18px;
+            color: #777;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 35px;
+            margin-bottom: 80px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(50px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #1860a0, #2d9e8a);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #e8f5f3, #d4eae8);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: rotateY(360deg);
+            background: linear-gradient(135deg, #1860a0, #2d9e8a);
+        }
+
+        .service-card h3 {
+            font-size: 24px;
+            color: #1a1a1a;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .service-card p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .service-features {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .service-features li {
+            padding: 10px 0;
+            color: #555;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .service-features li::before {
+            content: '✓';
+            color: #2d9e8a;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .learn-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1860a0;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .learn-more-btn:hover {
+            color: #2d9e8a;
+            transform: translateX(5px);
+        }
+
+        .why-choose-section {
+            background: white;
+            border-radius: 20px;
+            padding: 60px 40px;
+            margin: 80px 0;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.06);
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 0.8s ease;
+        }
+
+        .why-choose-section.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .benefit-item {
+            text-align: center;
+            padding: 30px 20px;
+            transition: all 0.3s ease;
+        }
+
+        .benefit-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .benefit-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .benefit-item h3 {
+            font-size: 20px;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+
+        .benefit-item p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+      
+        .process-section {
+            margin: 80px 0;
+        }
+
+        .process-timeline {
+            position: relative;
+            padding: 40px 0;
+        }
+
+        .process-step {
+            display: grid;
+            grid-template-columns: 1fr 80px 1fr;
+            gap: 30px;
+            margin-bottom: 60px;
+            align-items: center;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.6s ease;
+        }
+
+        .process-step.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .process-step:nth-child(even) {
+            transform: translateX(50px);
+        }
+
+        .process-step:nth-child(even).visible {
+            transform: translateX(0);
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #1860a0, #2d9e8a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 700;
+            color: white;
+            box-shadow: 0 4px 15px rgba(24, 96, 159, 0.3);
+        }
+
+        .step-content {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .step-content h3 {
+            font-size: 22px;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+
+        .step-content p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+       
+        .cta-section {
+            background: linear-gradient(135deg, #1860a0 0%, #2d9e8a 100%);
+            border-radius: 20px;
+            padding: 60px 40px;
+            text-align: center;
+            color: white;
+            margin-top: 80px;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 0.8s ease;
+        }
+
+        .cta-section.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .cta-section h2 {
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: rgba(255,255,255,0.95);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-white {
+            display: inline-block;
+            background: white;
+            color: #1860a0;
+            padding: 15px 40px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-outline {
+            display: inline-block;
+            background: transparent;
+            color: white;
+            padding: 15px 40px;
+            border: 2px solid white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: #1860a0;
+            transform: translateY(-3px);
+        }
+
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 80px;
+        }
+
+        footer p {
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+       
+        @media (max-width: 768px) {
+            .nav {
+                padding: 0 20px;
+            }
+
+            nav {
+                gap: 20px;
+                flex-wrap: wrap;
+            }
+
+            .page-header h1 {
+                font-size: 36px;
+            }
+
+            .page-header p {
+                font-size: 16px;
+            }
+
+            .section-header h2 {
+                font-size: 32px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-step {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .step-number {
+                margin: 0 auto;
+            }
+
+            .cta-section h2 {
+                font-size: 28px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+
+      
+        .service-card:nth-child(1) { transition-delay: 0.1s; }
+        .service-card:nth-child(2) { transition-delay: 0.2s; }
+        .service-card:nth-child(3) { transition-delay: 0.3s; }
+        .service-card:nth-child(4) { transition-delay: 0.4s; }
+        .service-card:nth-child(5) { transition-delay: 0.5s; }
+        .service-card:nth-child(6) { transition-delay: 0.6s; }
+
+        .process-step:nth-child(1) { transition-delay: 0.2s; }
+        .process-step:nth-child(2) { transition-delay: 0.4s; }
+        .process-step:nth-child(3) { transition-delay: 0.6s; }
+        .process-step:nth-child(4) { transition-delay: 0.8s; }
+    </style>
+</head>
+<body>
+
+    <!-- PAGE LOADER -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-tools">
+            <div class="tool-icon">💉</div>
+            <div class="tool-icon">🔬</div>
+            <div class="tool-icon">⚕️</div>
+        </div>
+        <div class="loader-text">Loading Services</div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <div class="nav">
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="products.html">Products</a>
+            <a href="services.html" class="active">Services</a>
+            <a href="events.html">Events</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </div>
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+        <h1>Our Services</h1>
+        <p>Comprehensive medical solutions from equipment supply to biomedical engineering support</p>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <div class="container">
+
+        <!-- MAIN SERVICES SECTION -->
+        <div class="section-header">
+            <h2>What We Offer</h2>
+            <p>Elite Medical provides end-to-end solutions for healthcare facilities across Rwanda and East Africa</p>
+        </div>
+
+        <div class="services-grid">
+
+            <!-- Service 1: MIS & Endoscopy Solutions -->
+            <div class="service-card">
+                <div class="service-icon">🔬</div>
+                <h3>Minimally Invasive Surgery (MIS) & Endoscopy Solutions</h3>
+                <p>State-of-the-art MIS and endoscopy equipment from leading international manufacturers, helping surgeons perform procedures with greater precision and faster patient recovery times.</p>
+                <ul class="service-features">
+                    <li>HD Visualization Towers</li>
+                    <li>Laparoscopic Instrument Sets</li>
+                    <li>Flexible & Rigid Endoscopes</li>
+                    <li>Complete MIS Operating Room Setup</li>
+                </ul>
+                <a href="#" class="learn-more-btn">
+                    Learn More →
+                </a>
+            </div>
+
+            <!-- Service 2: Medical Devices & Equipment -->
+            <div class="service-card">
+                <div class="service-icon">🏥</div>
+                <h3>Medical Devices & Equipment Supply</h3>
+                <p>Comprehensive range of medical equipment for hospitals, clinics, and surgical centers. All products meet international quality standards and come with full warranty support.</p>
+                <ul class="service-features">
+                    <li>Surgical Tables & Lights</li>
+                    <li>Patient Monitoring Systems</li>
+                    <li>Anesthesia Machines</li>
+                    <li>Diagnostic Equipment</li>
+                </ul>
+                <a href="#" class="learn-more-btn">
+                    Learn More →
+                </a>
+            </div>
+
+            <!-- Service 3: Surgical Consumables -->
+            <div class="service-card">
+                <div class="service-icon">📦</div>
+                <h3>Surgical Consumables</h3>
+                <p>High-quality surgical consumables and disposables for all specialties. Consistent supply chain management ensures you never run out of critical supplies.</p>
+                <ul class="service-features">
+                    <li>Sterile Surgical Gloves & Gowns</li>
+                    <li>Sutures & Surgical Needles</li>
+                    <li>Endoscopy Accessories</li>
+                    <li>Laboratory Consumables</li>
+                </ul>
+                <a href="#" class="learn-more-btn">
+                    Learn More →
+                </a>
+            </div>
+
+            <!-- Service 4: Biomedical Engineering Support -->
+            <div class="service-card">
+                <div class="service-icon">🔧</div>
+                <h3>Biomedical Engineering & Technical Support</h3>
+                <p>Our certified biomedical engineers provide installation, maintenance, calibration, and 24/7 technical support to keep your medical equipment operating at peak performance.</p>
+                <ul class="service-features">
+                    <li>Equipment Installation & Commissioning</li>
+                    <li>Preventive Maintenance Programs</li>
+                    <li>Calibration & Quality Assurance</li>
+                    <li>24/7 Emergency Support</li>
+                </ul>
+                <a href="#" class="learn-more-btn">
+                    Learn More →
+                </a>
+            </div>
+
+            <!-- Service 5: Training & Education -->
+            <div class="service-card">
+                <div class="service-icon">🎓</div>
+                <h3>Clinical Training & Education</h3>
+                <p>Hands-on training programs for surgeons, nurses, and biomedical technicians on the latest surgical techniques and equipment operation.</p>
+                <ul class="service-features">
+                    <li>MIS Surgical Technique Workshops</li>
+                    <li>Equipment Operation Training</li>
+                    <li>Biomedical Maintenance Courses</li>
+                    <li>Continuing Medical Education (CME)</li>
+                </ul>
+                <a href="#" class="learn-more-btn">
+                    Learn More →
+                </a>
+            </div>
+
+            <!-- Service 6: Custom Procurement Solutions -->
+            <div class="service-card">
+                <div class="service-icon">📋</div>
+                <h3>Customized Quotations & Procurement Solutions</h3>
+                <p>Tailored procurement solutions for hospitals and clinics. We work within your budget to provide the best equipment and consumables for your specific needs.</p>
+                <ul class="service-features">
+                    <li>Needs Assessment & Consultation</li>
+                    <li>Competitive Pricing & Quotations</li>
+                    <li>Flexible Payment Options</li>
+                    <li>Complete Project Management</li>
+                </ul>
+                <a href="#" class="learn-more-btn">
+                    Learn More →
+                </a>
+            </div>
+
+        </div>
+
+        <!-- WHY CHOOSE US SECTION -->
+        <div class="why-choose-section">
+            <div class="section-header">
+                <h2>Why Choose Elite Medical</h2>
+                <p>We go beyond equipment supply to become your long-term healthcare technology partner</p>
+            </div>
+
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <span class="benefit-icon">🏆</span>
+                    <h3>Proven Excellence</h3>
+                    <p>Over 50+ healthcare facilities trust Elite Medical for their equipment needs</p>
+                </div>
+
+                <div class="benefit-item">
+                    <span class="benefit-icon">🌍</span>
+                    <h3>Global Standards</h3>
+                    <p>All equipment meets international quality and safety certifications</p>
+                </div>
+
+                <div class="benefit-item">
+                    <span class="benefit-icon">⚡</span>
+                    <h3>Fast Response</h3>
+                    <p>24/7 technical support with rapid on-site service across Rwanda</p>
+                </div>
+
+                <div class="benefit-item">
+                    <span class="benefit-icon">💼</span>
+                    <h3>Complete Solutions</h3>
+                    <p>From consultation to installation, maintenance, and training</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- OUR PROCESS SECTION -->
+        <div class="process-section">
+            <div class="section-header">
+                <h2>How We Work</h2>
+                <p>Our streamlined process ensures smooth implementation from start to finish</p>
+            </div>
+
+            <div class="process-timeline">
+                <!-- Step 1 -->
+                <div class="process-step">
+                    <div class="step-content">
+                        <h3>Consultation & Assessment</h3>
+                        <p>We meet with your team to understand your specific needs, budget, and timeline. Our experts conduct a thorough assessment of your requirements.</p>
+                    </div>
+                    <div class="step-number">1</div>
+                    <div></div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="process-step">
+                    <div></div>
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Custom Solution Design</h3>
+                        <p>We design a tailored solution with detailed quotations, equipment specifications, and implementation timeline that fits your facility's needs.</p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="process-step">
+                    <div class="step-content">
+                        <h3>Installation & Commissioning</h3>
+                        <p>Our certified biomedical engineers install and commission all equipment, ensuring everything operates perfectly before handover.</p>
+                    </div>
+                    <div class="step-number">3</div>
+                    <div></div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="process-step">
+                    <div></div>
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Training & Ongoing Support</h3>
+                        <p>Comprehensive staff training and continuous technical support to maximize equipment utilization and ensure long-term success.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CALL TO ACTION -->
+        <div class="cta-section">
+            <h2>Ready to Transform Your Healthcare Facility?</h2>
+            <p>Contact Elite Medical today for a free consultation and customized quotation</p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn-white">Request a Quote</a>
+                <a href="#call" class="btn-outline">Call +250 798 697 025</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Elite Medical Ltd. All rights reserved.</p>
+        <p>Transforming Healthcare Through Advanced Medical & Surgical Solutions</p>
+        <p>📍 KK106ST, Kigali, Rwanda | 📞 +250 798 697 025 | ✉️ info@elitemedicale.rw</p>
+    </footer>
+
+    <!-- JAVASCRIPT FOR ANIMATIONS -->
+    <script>
+      
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('pageLoader');
+            
+            setTimeout(function() {
+                loader.classList.add('hidden');
+                setTimeout(function() {
+                    loader.style.display = 'none';
+                }, 600);
+            }, 2000);
+        });
+
+        // ========================================
+        // INTERSECTION OBSERVER - SCROLL ANIMATIONS
+        // ========================================
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Observe section headers
+            const headers = document.querySelectorAll('.section-header');
+            headers.forEach(header => observer.observe(header));
+
+            // Observe service cards
+            const serviceCards = document.querySelectorAll('.service-card');
+            serviceCards.forEach(card => observer.observe(card));
+
+            // Observe why choose section
+            const whyChoose = document.querySelector('.why-choose-section');
+            if (whyChoose) observer.observe(whyChoose);
+
+            // Observe process steps
+            const processSteps = document.querySelectorAll('.process-step');
+            processSteps.forEach(step => observer.observe(step));
+
+            // Observe CTA section
+            const ctaSection = document.querySelector('.cta-section');
+            if (ctaSection) observer.observe(ctaSection);
+        });
+
+        // ========================================
+        // SMOOTH SCROLL
+        // ========================================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

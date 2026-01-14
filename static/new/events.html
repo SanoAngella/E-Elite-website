@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Medical - Events & Partnerships</title>
+    <link rel="stylesheet" href="try.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1860a0 0%, #2d9e8a 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        .page-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-tools {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .tool-icon {
+            font-size: 50px;
+            animation: tool-bounce 1.5s ease-in-out infinite;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+        }
+
+        .tool-icon:nth-child(1) { animation-delay: 0s; }
+        .tool-icon:nth-child(2) { animation-delay: 0.2s; }
+        .tool-icon:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes tool-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-25px); }
+        }
+
+        .loader-text {
+            margin-top: 20px;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .nav {
+            background: white;
+            padding: 0 100px;
+            border-bottom: 2px solid #e0e0e0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            gap: 40px;
+            padding: 20px 0;
+            align-items: center;
+        }
+
+        nav a {
+            color: rgb(54, 51, 51);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: rgb(48, 118, 178);
+        }
+
+        nav a.active {
+            color: rgb(24, 96, 159);
+            font-weight: 600;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, #1860a0 0%, #2d9e8a 100%);
+            padding: 80px 20px 60px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .page-header p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto;
+            color: rgba(255,255,255,0.95);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .filter-section {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+        }
+
+        .filter-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .filter-btn {
+            background: white;
+            border: 2px solid #e0e0e0;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-btn:hover {
+            border-color: #2d9e8a;
+            color: #2d9e8a;
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, #1860a0, #2d9e8a);
+            color: white;
+            border-color: transparent;
+        }
+
+        .filter-icon {
+            font-size: 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .section-header.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+
+        .section-header p {
+            font-size: 18px;
+            color: #777;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #1860a0, #2d9e8a);
+        }
+
+        .event-brief {
+            position: relative;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.6s ease;
+        }
+
+        .event-brief.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .event-brief:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            transform: translateX(10px);
+        }
+
+        .event-brief::before {
+            content: '';
+            position: absolute;
+            left: -55px;
+            top: 35px;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border: 4px solid #2d9e8a;
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(45, 158, 138, 0.1);
+        }
+
+        .event-date-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #1860a0, #2d9e8a);
+            color: white;
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .event-type-badge {
+            display: inline-block;
+            background: #e8f5f3;
+            color: #2d9e8a;
+            padding: 6px 15px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .event-brief h3 {
+            font-size: 24px;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .event-brief-summary {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .event-meta-row {
+            display: flex;
+            gap: 25px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .meta-detail {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #777;
+            font-size: 14px;
+        }
+
+        .meta-icon {
+            font-size: 18px;
+        }
+
+        .read-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1860a0;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .read-more-btn:hover {
+            color: #2d9e8a;
+            transform: translateX(5px);
+        }
+
+        .partnerships-section {
+            margin-top: 80px;
+            padding: 60px 40px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 0.8s ease;
+        }
+
+        .partnerships-section.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .partner-category {
+            margin-bottom: 50px;
+        }
+
+        .partner-category h3 {
+            font-size: 28px;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .partner-category-icon {
+            font-size: 32px;
+        }
+
+        .partner-subtitle {
+            color: #777;
+            font-size: 16px;
+            margin-bottom: 25px;
+        }
+
+        .partner-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .partner-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid #2d9e8a;
+            transition: all 0.3s ease;
+        }
+
+        .partner-card:hover {
+            background: white;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            transform: translateY(-3px);
+        }
+
+        .partner-card h4 {
+            color: #1860a0;
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .partner-card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #1860a0 0%, #2d9e8a 100%);
+            border-radius: 16px;
+            padding: 60px 40px;
+            text-align: center;
+            color: white;
+            margin-top: 80px;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 0.8s ease;
+        }
+
+        .cta-section.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .cta-section h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: rgba(255,255,255,0.95);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-white {
+            display: inline-block;
+            background: white;
+            color: #1860a0;
+            padding: 15px 35px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-outline {
+            display: inline-block;
+            background: transparent;
+            color: white;
+            padding: 15px 35px;
+            border: 2px solid white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: #1860a0;
+            transform: translateY(-3px);
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 80px;
+        }
+
+        footer p {
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                padding: 0 20px;
+            }
+
+            nav {
+                gap: 20px;
+                flex-wrap: wrap;
+            }
+
+            .page-header h1 {
+                font-size: 32px;
+            }
+
+            .timeline {
+                padding-left: 30px;
+            }
+
+            .event-brief::before {
+                left: -45px;
+            }
+
+            .section-header h2 {
+                font-size: 28px;
+            }
+
+            .cta-section h2 {
+                font-size: 28px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .partnerships-section {
+                padding: 40px 20px;
+            }
+        }
+
+        .event-brief:nth-child(1) { transition-delay: 0.1s; }
+        .event-brief:nth-child(2) { transition-delay: 0.2s; }
+        .event-brief:nth-child(3) { transition-delay: 0.3s; }
+        .event-brief:nth-child(4) { transition-delay: 0.4s; }
+        .event-brief:nth-child(5) { transition-delay: 0.5s; }
+        .event-brief:nth-child(6) { transition-delay: 0.6s; }
+    </style>
+</head>
+<body>
+
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-tools">
+            <div class="tool-icon">💉</div>
+            <div class="tool-icon">🔬</div>
+            <div class="tool-icon">⚕️</div>
+        </div>
+        <div class="loader-text">Loading Events</div>
+    </div>
+
+    <div class="nav">
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="products.html">Products</a>
+            <a href="services1.html">Services</a>
+            <a href="events.html" class="active">Events</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </div>
+
+    <div class="page-header">
+        <h1>Events & Strategic Partnerships</h1>
+        <p>Advancing Healthcare Excellence Through Innovation, Training, and Collaboration</p>
+    </div>
+
+    <div class="container">
+
+        <div class="filter-section">
+            <button class="filter-btn active">
+                <span class="filter-icon">📅</span>
+                <span>All Events</span>
+            </button>
+            <button class="filter-btn">
+                <span class="filter-icon">🎓</span>
+                <span>Scientific Training</span>
+            </button>
+            <button class="filter-btn">
+                <span class="filter-icon">🏥</span>
+                <span>Exhibitions</span>
+            </button>
+            <button class="filter-btn">
+                <span class="filter-icon">🤝</span>
+                <span>Community Outreach</span>
+            </button>
+        </div>
+
+        <div class="section-header">
+            <h2>Upcoming & Recent Events</h2>
+            <p>Discover our participation in Rwanda's healthcare transformation</p>
+        </div>
+
+        <div class="timeline">
+
+            <div class="event-brief">
+                <div>
+                    <span class="event-date-tag">JUL 2025</span>
+                    <span class="event-type-badge">🏥 Exhibition</span>
+                </div>
+                <h3>13th IAS Conference on HIV Science (IAS 2025)</h3>
+                <div class="event-meta-row">
+                    <div class="meta-detail">
+                        <span class="meta-icon">📍</span>
+                        <span>Kigali Convention Centre, Rwanda</span>
+                    </div>
+                    <div class="meta-detail">
+                        <span class="meta-icon">📅</span>
+                        <span>July 15-19, 2025</span>
+                    </div>
+                </div>
+                <p class="event-brief-summary">Elite Medical will showcase advanced diagnostic and laboratory consumables at Africa's premier HIV science conference. We're proud to support Rwanda's role as a global hub for clinical research and innovation in HIV treatment.</p>
+                <a href="#" class="read-more-btn">
+                    Read More
+                    <span>→</span>
+                </a>
+            </div>
+
+            <div class="event-brief">
+                <div>
+                    <span class="event-date-tag">JUN 2025</span>
+                    <span class="event-type-badge">🤝 Technical Support</span>
+                </div>
+                <h3>12th EDCTP Forum - Clinical Research Excellence</h3>
+                <div class="event-meta-row">
+                    <div class="meta-detail">
+                        <span class="meta-icon">📍</span>
+                        <span>Kigali, Rwanda</span>
+                    </div>
+                    <div class="meta-detail">
+                        <span class="meta-icon">📅</span>
+                        <span>June 10-13, 2025</span>
+                    </div>
+                </div>
+                <p class="event-brief-summary">Elite Medical provides technical support for this major clinical research forum, demonstrating our commitment to advancing global health research infrastructure. This partnership strengthens Rwanda's position in pharmaceutical development and clinical trials.</p>
+                <a href="#" class="read-more-btn">
+                    Read More
+                    <span>→</span>
+                </a>
+            </div>
+
+            <div class="event-brief">
+                <div>
+                    <span class="event-date-tag">FEB 2025</span>
+                    <span class="event-type-badge">🏥 Exhibition</span>
+                </div>
+                <h3>Pan-African Surgical Conference 2025</h3>
+                <div class="event-meta-row">
+                    <div class="meta-detail">
+                        <span class="meta-icon">📍</span>
+                        <span>Serena Hotel, Kigali</span>
+                    </div>
+                    <div class="meta-detail">
+                        <span class="meta-icon">📅</span>
+                        <span>February 18-21, 2025</span>
+                    </div>
+                </div>
+                <p class="event-brief-summary">Elite Medical showcased cutting-edge Minimally Invasive Surgery (MIS) technologies and endoscopy systems to over 300 surgeons from across Africa. Our HD Visualization Towers and laparoscopic instrument sets received significant interest from regional healthcare leaders.</p>
+                <a href="#" class="read-more-btn">
+                    Read More
+                    <span>→</span>
+                </a>
+            </div>
+
+            <div class="event-brief">
+                <div>
+                    <span class="event-date-tag">NOV 2024</span>
+                    <span class="event-type-badge">🎓 Scientific Training</span>
+                </div>
+                <h3>Biomedical Excellence Workshop for Rwandan Surgeons</h3>
+                <div class="event-meta-row">
+                    <div class="meta-detail">
+                        <span class="meta-icon">📍</span>
+                        <span>King Faisal Hospital, Kigali</span>
+                    </div>
+                    <div class="meta-detail">
+                        <span class="meta-icon">📅</span>
+                        <span>November 22-24, 2024</span>
+                    </div>
+                </div>
+                <p class="event-brief-summary">Elite Medical conducted hands-on training for 45 Rwandan surgeons on advanced MIS techniques using HD Visualization Towers and laparoscopic instruments. This workshop significantly enhanced surgical capacity across major hospitals in Kigali, Huye, and Musanze.</p>
+                <a href="#" class="read-more-btn">
+                    Read More
+                    <span>→</span>
+                </a>
+            </div>
+
+            <div class="event-brief">
+                <div>
+                    <span class="event-date-tag">SEP 2024</span>
+                    <span class="event-type-badge">🤝 Community Outreach</span>
+                </div>
+                <h3>Elite Mobile Clinic Community Outreach Program</h3>
+                <div class="event-meta-row">
+                    <div class="meta-detail">
+                        <span class="meta-icon">📍</span>
+                        <span>Rural Districts, Rwanda</span>
+                    </div>
+                    <div class="meta-detail">
+                        <span class="meta-icon">📅</span>
+                        <span>September 2024</span>
+                    </div>
+                </div>
+                <p class="event-brief-summary">In partnership with Lifesten Health, Elite Medical launched the Mobile Clinic initiative, bringing essential medical screenings and health education to underserved communities. This program aligns with Rwanda's Universal Health Coverage goals.</p>
+                <a href="#" class="read-more-btn">
+                    Read More
+                    <span>→</span>
+                </a>
+            </div>
+
+            <div class="event-brief">
+                <div>
+                    <span class="event-date-tag">AUG 2024</span>
+                    <span class="event-type-badge">🎓 Scientific Training</span>
+                </div>
+                <h3>Cervical Cancer Elimination Strategy Workshop</h3>
+                <div class="event-meta-row">
+                    <div class="meta-detail">
+                        <span class="meta-icon">📍</span>
+                        <span>Rwanda Biomedical Centre (RBC)</span>
+                    </div>
+                    <div class="meta-detail">
+                        <span class="meta-icon">📅</span>
+                        <span>August 15, 2024</span>
+                    </div>
+                </div>
+                <p class="event-brief-summary">Elite Medical supported the Ministry of Health's cervical cancer elimination training by supplying specialized endoscopy equipment and consumables. This initiative is part of Rwanda's ambitious goal to eliminate cervical cancer by 2030.</p>
+                <a href="#" class="read-more-btn">
+                    Read More
+                    <span>→</span>
+                </a>
+            </div>
+
+        </div>
+
+        <div class="partnerships-section">
+            <div class="section-header">
+                <h2>Strategic Cooperations</h2>
+                <p>Building bridges between local healthcare needs and global medical innovations</p>
+            </div>
+
+            <div class="partner-category">
+                <h3>
+                    <span class="partner-category-icon">🏛️</span>
+                    Public Sector Partners
+                </h3>
+                <p class="partner-subtitle">Collaborating with government institutions to advance national health goals</p>
+                <div class="partner-grid">
+                    <div class="partner-card">
+                        <h4>Ministry of Health (MOH)</h4>
+                        <p>Strategic partnership supporting Rwanda's Universal Health Coverage initiatives and surgical capacity building programs across all provinces.</p>
+                    </div>
+                    <div class="partner-card">
+                        <h4>Rwanda Biomedical Centre (RBC)</h4>
+                        <p>Technical collaboration on cervical cancer elimination strategy, providing specialized equipment and training for healthcare workers nationwide.</p>
+                    </div>
+                    <div class="partner-card">
+                        <h4>University Teaching Hospitals</h4>
+                        <p>Long-term partnerships with CHUK, King Faisal, and University Teaching Hospital Butare for medical equipment supply and biomedical training.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="partner-category">
+                <h3>
+                    <span class="partner-category-icon">🌍</span>
+                    Global Technology Partners
+                </h3>
+                <p class="partner-subtitle">Acting as a strategic bridge bringing European and Asian surgical innovations to East Africa</p>
+                <div class="partner-grid">
+                    <div class="partner-card">
+                        <h4>European MIS Manufacturers</h4>
+                        <p>Exclusive distribution partnerships with leading European manufacturers of minimally invasive surgical systems and HD visualization technology.</p>
+                    </div>
+                    <div class="partner-card">
+                        <h4>Asian Medical Device Leaders</h4>
+                        <p>Strategic alliances with top Asian manufacturers for cost-effective, high-quality endoscopy systems and surgical consumables.</p>
+                    </div>
+                    <div class="partner-card">
+                        <h4>International Biomedical Networks</h4>
+                        <p>Member of global biomedical engineering networks, ensuring access to latest maintenance protocols and technical innovations.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="partner-category">
+                <h3>
+                    <span class="partner-category-icon">🤝</span>
+                    Private Sector Collaborations
+                </h3>
+                <p class="partner-subtitle">Local partnerships driving healthcare innovation and community impact</p>
+                <div class="partner-grid">
+                    <div class="partner-card">
+                        <h4>Lifesten Health</h4>
+                        <p>Joint initiative operating the Elite Mobile Clinic, providing community health screenings and digital health education in rural areas.</p>
+                    </div>
+                    <div class="partner-card">
+                        <h4>Private Hospital Networks</h4>
+                        <p>Preferred supplier agreements with leading private hospitals including La Nouvelle Clinique, Polyclinique du Plateau, and Legacy Clinics.</p>
+                    </div>
+                    <div class="partner-card">
+                        <h4>Medical Training Institutions</h4>
+                        <p>Partnership with University of Rwanda Medical School and Rwanda Military Hospital for surgical skills training and equipment demonstrations.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2>Let's Collaborate</h2>
+            <p>Join Elite Medical in advancing healthcare excellence across Rwanda and East Africa</p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn-white">Partner with Us</a>
+                <a href="#invite" class="btn-outline">Invite Us to Your Event</a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Elite Medical Ltd. All rights reserved.</p>
+        <p>Transforming Healthcare Through Advanced Medical & Surgical Solutions</p>
+        <p>📍 KK106ST, Kigali, Rwanda | 📞 +250 798 697 025 | ✉️ info@elitemedicale.rw</p>
+    </footer>
+
+    <script>
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('pageLoader');
+            
+            setTimeout(function() {
+                loader.classList.add('hidden');
+                setTimeout(function() {
+                    loader.style.display = 'none';
+                }, 600);
+            }, 2000);
+        });
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterSection = document.querySelector('.filter-section');
+            if (filterSection) observer.observe(filterSection);
+
+            const headers = document.querySelectorAll('.section-header');
+            headers.forEach(header => observer.observe(header));
+
+            const eventBriefs = document.querySelectorAll('.event-brief');
+            eventBriefs.forEach(brief => observer.observe(brief));
+
+            const partnershipsSection = document.querySelector('.partnerships-section');
+            if (partnershipsSection) observer.observe(partnershipsSection);
+
+            const ctaSection = document.querySelector('.cta-section');
+            if (ctaSection) observer.observe(ctaSection);
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
