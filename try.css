@@ -26,7 +26,7 @@ h2{
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #1860a0 0%, #2d9e8a 100%);
+    background: #1860a0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -54,7 +54,7 @@ h2{
 
 .tool-icon {
     font-size: 50px;
-    animation: tool-bounce 1.5s ease-in-out infinite;
+    animation: none;
     filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
 }
 
@@ -185,6 +185,8 @@ h2{
     position: sticky;
     top: 0;
     z-index: 1000;
+    display: flex;
+    justify-content: center;
 }
 
 nav {
@@ -192,6 +194,7 @@ nav {
     gap: 40px;
     padding: 20px 0;
     align-items: center;
+    justify-content: center;
 }
 
 nav a {
@@ -287,7 +290,7 @@ nav a:hover {
     padding: 60px 100px;
     background: white;
     margin-top: 30px;
-    border-radius: 12px;
+    border-radius: 8px;
 }
 #title {
         font-size: 36px;
@@ -318,7 +321,7 @@ nav a:hover {
 .about-image {
     width: 100%;
     height: 400px;
-    border-radius: 12px;
+    border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
@@ -364,7 +367,7 @@ nav a:hover {
 
 .specialty-card {
     background: white;
-    border-radius: 16px;
+    border-radius: 8px;
     padding: 30px;
     display: flex;
     align-items: center;
@@ -415,7 +418,7 @@ nav a:hover {
 .feature-card {
     position: relative;
     background: white;
-    border-radius: 12px;
+    border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
@@ -473,7 +476,7 @@ main.grid-container {
     margin: 30px auto;
     padding: 40px 100px;
     background: white;
-    border-radius: 12px;
+    border-radius: 8px;
 }
 
 .grid-container {
@@ -691,7 +694,7 @@ body {
 /* .page-loader {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(135deg, #1860a0 0%, #2d9e8a 100%);
+    background: #1860a0;
     display: flex; flex-direction: column; justify-content: center; align-items: center;
     z-index: 9999; transition: opacity 0.6s ease, visibility 0.6s ease;
 }
@@ -700,7 +703,7 @@ body {
 
 .tool-icon {
     font-size: 50px;
-    animation: tool-bounce 1.5s ease-in-out infinite;
+    animation: none;
 }
 
 @keyframes tool-bounce {
@@ -753,7 +756,7 @@ footer { background: #1a1a1a; color: white; padding: 40px 20px; text-align: cent
 }
 
 .grid-item, .specialty-card {
-    background: white; border-radius: 16px; padding: 25px;
+    background: white; border-radius: 8px; padding: 25px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: transform 0.3s ease;
 }
 
@@ -796,7 +799,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #1860a0 0%, #2d9e8a 100%);
+    background: #1860a0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -820,14 +823,18 @@ body {
 }
 
 .tool-icon {
-    font-size: 50px;
-    animation: tool-bounce 1.5s ease-in-out infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: none;
     filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
 }
 
-.tool-icon:nth-child(1) { animation-delay: 0s; }
-.tool-icon:nth-child(2) { animation-delay: 0.2s; }
-.tool-icon:nth-child(3) { animation-delay: 0.4s; }
+.tool-icon img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
 
 @keyframes tool-bounce {
     0%, 100% { transform: translateY(0); }
@@ -923,7 +930,7 @@ nav a.active {
 }
 
 .page-header {
-    background: linear-gradient(135deg, #1860a0 0%, #2d9e8a 100%);
+    background: #1860a0;
     padding: 100px 20px;
     text-align: center;
     color: white;
@@ -1126,7 +1133,7 @@ nav a.active {
 .about-image {
     width: 100%;
     height: 400px;
-    border-radius: 12px;
+    border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
@@ -1165,7 +1172,7 @@ nav a.active {
 
 .specialty-card {
     background: white;
-    border-radius: 16px;
+    border-radius: 8px;
     padding: 30px;
     display: flex;
     align-items: center;
@@ -1215,7 +1222,7 @@ nav a.active {
 .feature-card {
     position: relative;
     background: white;
-    border-radius: 12px;
+    border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
@@ -1272,7 +1279,7 @@ main.grid-container {
     margin: 30px auto;
     padding: 40px 100px;
     background: white;
-    border-radius: 12px;
+    border-radius: 8px;
 }
 
 .grid-container {
@@ -1333,7 +1340,7 @@ main.grid-container {
 
 .service-card {
     background: white;
-    border-radius: 16px;
+    border-radius: 8px;
     padding: 40px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     transition: all 0.4s ease;
@@ -1373,7 +1380,7 @@ main.grid-container {
     width: 80px;
     height: 80px;
     background: linear-gradient(135deg, #e8f5f3, #d4eae8);
-    border-radius: 16px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1488,7 +1495,7 @@ main.grid-container {
 .event-brief {
     position: relative;
     background: white;
-    border-radius: 12px;
+    border-radius: 8px;
     padding: 30px;
     margin-bottom: 30px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
@@ -1612,7 +1619,7 @@ main.grid-container {
 
 .featured-event {
     background: white;
-    border-radius: 16px;
+    border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 10px 40px rgba(0,0,0,0.1);
     margin-bottom: 80px;
@@ -1721,7 +1728,7 @@ main.grid-container {
 
 .event-card {
     background: white;
-    border-radius: 12px;
+    border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     transition: all 0.4s ease;
@@ -1794,7 +1801,7 @@ main.grid-container {
 
 .news-card {
     background: white;
-    border-radius: 12px;
+    border-radius: 8px;
     padding: 30px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     transition: all 0.4s ease;
@@ -1839,7 +1846,7 @@ main.grid-container {
     margin-top: 80px;
     padding: 60px 40px;
     background: white;
-    border-radius: 16px;
+    border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.06);
     opacity: 0;
     transform: scale(0.95);
@@ -1987,7 +1994,7 @@ main.grid-container {
 .mvv-card {
     background: white;
     padding: 40px;
-    border-radius: 16px;
+    border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     transition: all 0.4s ease;
     opacity: 0;
@@ -2082,7 +2089,7 @@ main.grid-container {
 .spec-item {
     background: #f8f9fa;
     padding: 30px;
-    border-radius: 12px;
+    border-radius: 8px;
     transition: all 0.3s ease;
     border-left: 4px solid transparent;
 }
@@ -2110,7 +2117,7 @@ main.grid-container {
 }
 
 .stats-section {
-    background: linear-gradient(135deg, #1860a0 0%, #2d9e8a 100%);
+    background: #1860a0;
     border-radius: 20px;
     padding: 60px 40px;
     margin: 100px 0;
@@ -2177,7 +2184,7 @@ main.grid-container {
 .commitment-card {
     background: white;
     padding: 35px;
-    border-radius: 12px;
+    border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     text-align: center;
     transition: all 0.3s ease;
@@ -2308,7 +2315,7 @@ main.grid-container {
 .step-content {
     background: white;
     padding: 30px;
-    border-radius: 12px;
+    border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
 }
 
@@ -2486,7 +2493,7 @@ main.grid-container {
 .info-card {
     background: white;
     padding: 30px;
-    border-radius: 16px;
+    border-radius: 8px;
     margin-bottom: 25px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     transition: all 0.3s ease;
@@ -2504,7 +2511,7 @@ main.grid-container {
     width: 60px;
     height: 60px;
     background: linear-gradient(135deg, #e8f5f3, #d4eae8);
-    border-radius: 12px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2573,7 +2580,7 @@ main.grid-container {
     width: 100%;
     height: 400px;
     background: linear-gradient(135deg, #e8f5f3 0%, #d4eae8 100%);
-    border-radius: 16px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2583,7 +2590,7 @@ main.grid-container {
 }
 
 .hours-section {
-    background: linear-gradient(135deg, #1860a0 0%, #2d9e8a 100%);
+    background: #1860a0;
     border-radius: 20px;
     padding: 50px;
     color: white;
@@ -2613,7 +2620,7 @@ main.grid-container {
 .hours-card {
     background: rgba(255,255,255,0.1);
     padding: 25px;
-    border-radius: 12px;
+    border-radius: 8px;
     text-align: center;
     backdrop-filter: blur(10px);
 }
@@ -2720,7 +2727,7 @@ main.grid-container {
 
 /* --- CTA & Footer --- */
 .cta-section {
-    background: linear-gradient(135deg, #1860a0 0%, #2d9e8a 100%);
+    background: #1860a0;
     border-radius: 20px;
     padding: 60px 40px;
     text-align: center;
