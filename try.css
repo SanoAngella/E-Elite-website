@@ -885,7 +885,6 @@ body {
     position: sticky;
     top: 0;
     z-index: 1000;
-    position: fixed;
 }
 
 nav {
@@ -2730,6 +2729,13 @@ footer p { font-size: 14px; line-height: 1.8; margin-bottom: 10px; }
 footer a { color: #3498db; text-decoration: none; }
 footer a:hover { text-decoration: underline; }
 
+/* responsiveness */
+
+img, video, iframe, .about-image img, .grid-item img {
+    max-width: 100%;
+    height: auto;
+}
+
 /* --- Helper Classes --- */
 .text-center { text-align: center; }
 .mt-20 { margin-top: 20px; }
@@ -2746,16 +2752,45 @@ footer a:hover { text-decoration: underline; }
 .news-card:nth-child(3), .event-card:nth-child(3), .process-step:nth-child(3) { transition-delay: 0.3s; }
 
 /* --- Responsive Media Queries --- */
+@media (max-width: 1024px) {
+    .nav { padding: 0 30px; }
+    .hero-section, .about-section, .specialties-section, .features-section,
+    main.grid-container, .services-section, .contact-grid, .featured-event-grid {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    .hero-section { padding: 40px 30px; }
+}
+
 @media (max-width: 768px) {
     .nav { padding: 0 20px; }
-    nav { gap: 20px; flex-wrap: wrap; }
+    nav { gap: 16px; flex-wrap: wrap; justify-content: center; }
+    nav a { flex: 1 1 140px; min-width: 120px; text-align: center; }
     .page-header h1, .hero-title { font-size: 32px; }
+    .page-header .tagline, .hero-description { font-size: 16px; }
     .section-title, .section-header h2, .story-content h2, .about-content h2 { font-size: 28px; }
-    .about-section, .story-section, .contact-grid, .featured-event-grid { grid-template-columns: 1fr; gap: 40px; }
+    .about-section, .story-section, .contact-grid, .featured-event-grid,
+    .services-grid, .events-grid, .news-grid, .partner-grid, .mvv-grid,
+    .hours-grid, .commitment-grid, .spec-grid { grid-template-columns: 1fr; gap: 30px; }
     .process-step { grid-template-columns: 1fr; text-align: center; }
     .step-number { margin: 0 auto; }
     .cta-buttons { flex-direction: column; }
     .about-image, .story-image, .featured-image { height: 300px; }
+    .hero-section { padding: 30px 20px; }
+    .specialty-card, .service-card, .event-card, .news-card, .info-card, .partner-card { padding: 24px; }
+    .hero-btn, .btn-white, .btn-primary, .btn-outline, .submit-btn { width: 100%; text-align: center; }
+    footer p, footer a { font-size: 14px; }
+}
+
+@media (max-width: 480px) {
+    nav a { flex: 1 1 100%; }
+    .page-header h1, .hero-title { font-size: 28px; }
+    .page-header .tagline, .section-title, .about-content h2, .feature-content h3,
+    .event-card h3, .news-card h3 { font-size: 22px; }
+    .page-header { padding: 60px 20px; }
+    .hero-section { padding: 24px 16px; }
+    .specialties-grid, .services-grid, .events-grid, .news-grid,
+    .partner-grid, .mvv-grid, .hours-grid, .commitment-grid, .spec-grid { gap: 20px; }
 }
 
 @media print {
