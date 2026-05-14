@@ -22,7 +22,6 @@
         <div class="loader-text">Loading Services</div>
     </div>
 
-    <!-- NAVIGATION -->
     <div class="nav">
         <nav>
             <a href="index.html">Home</a>
@@ -32,6 +31,7 @@
             <a href="events.html">Events</a>
             <a href="contact.html">Contact</a>
         </nav>
+        <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
     </div>
 
     <!-- PAGE HEADER -->
@@ -304,6 +304,15 @@
             // Observe CTA section
             const ctaSection = document.querySelector('.cta-section');
             if (ctaSection) observer.observe(ctaSection);
+
+            // Mobile menu toggle
+            const navToggle = document.querySelector('.nav-toggle');
+            const nav = document.querySelector('nav');
+            if (navToggle && nav) {
+                navToggle.addEventListener('click', () => {
+                    nav.classList.toggle('active');
+                });
+            }
         });
 
         // ========================================

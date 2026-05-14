@@ -19,6 +19,8 @@
             <a href="contact.html">Contact</a>
             <a href="register1.html">Register</a>
         </nav>
+        <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+    </div>
 
 <video width="320" height="240" autoplay>
     <source src="less.mp4" type="video/mp4">
@@ -27,6 +29,21 @@
 
 
     </div>
+
+<script>
+    // Mobile menu toggle
+    document.addEventListener('DOMContentLoaded', () => {
+        const navToggle = document.querySelector('.nav-toggle');
+        const nav = document.querySelector('nav');
+        
+        if (navToggle && nav) {
+            navToggle.addEventListener('click', () => {
+                nav.classList.toggle('active');
+            });
+        }
+    });
+</script>
+
 </body>
 </html>
 <!-- <style>

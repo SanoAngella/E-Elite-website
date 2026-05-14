@@ -72,9 +72,10 @@
             <a href="about.html">About</a>
             <a href="products.html">Products</a>
             <a href="services1.html">Services</a>
-            <a href="events.html" class="active">Events</a>
+            <a href="events.html">Events</a>
             <a href="contact.html">Contact</a>
         </nav>
+        <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
     </div>
 
     
@@ -149,6 +150,16 @@
             setTimeout(() => {
                 loader.classList.add('hidden');
             }, 2000);
+        });
+
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', () => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const nav = document.querySelector('nav');
+            
+            navToggle.addEventListener('click', () => {
+                nav.classList.toggle('active');
+            });
         });
     </script>
     <footer>

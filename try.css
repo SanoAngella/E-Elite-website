@@ -893,7 +893,16 @@ nav {
     padding: 20px 0;
     align-items: center;
     width: 100%;
+}
 
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+    padding: 10px;
 }
 
 nav a {
@@ -2784,8 +2793,35 @@ img, video, iframe, .about-image img, .grid-item img {
 
 @media (max-width: 768px) {
     .nav { padding: 0 20px; }
-    nav { gap: 16px; flex-wrap: wrap; justify-content: center; }
-    nav a { flex: 1 1 140px; min-width: 120px; text-align: center; }
+    .nav-toggle { display: block; }
+    nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        gap: 0;
+        padding: 0;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+    nav.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+    nav a {
+        padding: 15px 20px;
+        border-bottom: 1px solid #eee;
+        width: 100%;
+        text-align: left;
+    }
+    nav a:last-child { border-bottom: none; }
+}
     .page-header h1, .hero-title { font-size: 32px; }
     .page-header .tagline, .hero-description { font-size: 16px; }
     .section-title, .section-header h2, .story-content h2, .about-content h2 { font-size: 28px; }

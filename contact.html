@@ -36,6 +36,7 @@
             <a href="events.html">Events</a>
             <a href="contact.html" class="active">Contact</a>
         </nav>
+        <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
     </div>
 
     <div class="page-header">
@@ -221,6 +222,15 @@
 
             const hoursSection = document.querySelector('.hours-section');
             if (hoursSection) observer.observe(hoursSection);
+
+            // Mobile menu toggle
+            const navToggle = document.querySelector('.nav-toggle');
+            const nav = document.querySelector('nav');
+            if (navToggle && nav) {
+                navToggle.addEventListener('click', () => {
+                    nav.classList.toggle('active');
+                });
+            }
         });
 
         document.getElementById('contactForm').addEventListener('submit', function(e) {

@@ -29,6 +29,7 @@
             <a href="events.html" class="active">Events</a>
             <a href="contact.html">Contact</a>
         </nav>
+        <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
     </div>
 
     <div class="page-header">
@@ -336,6 +337,15 @@
 
             const ctaSection = document.querySelector('.cta-section');
             if (ctaSection) observer.observe(ctaSection);
+
+            // Mobile menu toggle
+            const navToggle = document.querySelector('.nav-toggle');
+            const nav = document.querySelector('nav');
+            if (navToggle && nav) {
+                navToggle.addEventListener('click', () => {
+                    nav.classList.toggle('active');
+                });
+            }
         });
 
         document.addEventListener('DOMContentLoaded', function() {
