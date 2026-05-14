@@ -2390,8 +2390,28 @@ main.grid-container {
     min-height: 150px;
 }
 
+.contact-form-section form {
+    width: 100%;
+}
+
+.contact-form-section fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+.contact-form-section legend {
+    display: none;
+}
+
+.form-group input[type="file"],
+.form-group input[type="reset"],
+.form-group button,
 .submit-btn {
     width: 100%;
+}
+
+.submit-btn {
     background: linear-gradient(135deg, #1860a0, #2d9e8a);
     color: white;
     padding: 16px;
