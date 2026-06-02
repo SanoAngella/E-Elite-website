@@ -2779,9 +2779,34 @@ footer a:hover { text-decoration: underline; }
 
 /* responsiveness */
 
+html {
+    overflow-x: hidden;
+}
+
+body {
+    min-width: 0;
+}
+
 img, video, iframe, .about-image img, .grid-item img {
     max-width: 100%;
+}
+
+img, video, iframe {
     height: auto;
+}
+
+.logo img {
+    display: block;
+    max-width: 150px;
+}
+
+.container,
+.hero-section,
+.about-section,
+.specialties-section,
+.features-section,
+main.grid-container {
+    width: min(100% - 40px, 1200px);
 }
 
 /* --- Helper Classes --- */
@@ -2800,19 +2825,72 @@ img, video, iframe, .about-image img, .grid-item img {
 .news-card:nth-child(3), .event-card:nth-child(3), .process-step:nth-child(3) { transition-delay: 0.3s; }
 
 /* --- Responsive Media Queries --- */
+@media (max-width: 1200px) {
+    .nav {
+        padding: 0 50px;
+    }
+
+    nav {
+        gap: 26px;
+    }
+
+    .hero-section,
+    .about-section,
+    .specialties-section,
+    .features-section,
+    main.grid-container {
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+}
+
 @media (max-width: 1024px) {
     .nav { padding: 0 30px; }
+
+    nav {
+        gap: 18px;
+    }
+
     .hero-section, .about-section, .specialties-section, .features-section,
     main.grid-container, .services-section, .contact-grid, .featured-event-grid {
         padding-left: 30px;
         padding-right: 30px;
     }
+
     .hero-section { padding: 40px 30px; }
+
+    .features-grid,
+    .services-grid,
+    .events-grid,
+    .news-grid,
+    .partner-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .contact-grid,
+    .featured-event-grid,
+    .story-section {
+        gap: 40px;
+    }
 }
 
 @media (max-width: 768px) {
-    .nav { padding: 0 20px; }
-    .nav-toggle { display: block; }
+    .nav {
+        padding: 10px 20px;
+        min-height: 64px;
+    }
+
+    .nav-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        margin: 0;
+        padding: 0;
+        flex: 0 0 auto;
+    }
+
     nav {
         position: absolute;
         top: 100%;
@@ -2823,49 +2901,150 @@ img, video, iframe, .about-image img, .grid-item img {
         gap: 0;
         padding: 0;
         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        transform: translateY(-100%);
+        transform: translateY(-10px);
         opacity: 0;
         visibility: hidden;
         transition: all 0.3s ease;
+        z-index: 999;
     }
+
     nav.active {
         transform: translateY(0);
         opacity: 1;
         visibility: visible;
     }
+
     nav a {
         padding: 15px 20px;
         border-bottom: 1px solid #eee;
         width: 100%;
         text-align: left;
     }
+
     nav a:last-child { border-bottom: none; }
-}
+
     .page-header h1, .hero-title { font-size: 32px; }
     .page-header .tagline, .hero-description { font-size: 16px; }
     .section-title, .section-header h2, .story-content h2, .about-content h2 { font-size: 28px; }
+
+    .container,
+    .hero-section,
+    .about-section,
+    .specialties-section,
+    .features-section,
+    main.grid-container {
+        width: min(100% - 32px, 1200px);
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .container {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+
     .about-section, .story-section, .contact-grid, .featured-event-grid,
     .services-grid, .events-grid, .news-grid, .partner-grid, .mvv-grid,
     .hours-grid, .commitment-grid, .spec-grid { grid-template-columns: 1fr; gap: 30px; }
+
+    .specialties-grid,
+    .features-grid,
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+
     .process-step { grid-template-columns: 1fr; text-align: center; }
     .step-number { margin: 0 auto; }
     .cta-buttons { flex-direction: column; }
     .about-image, .story-image, .featured-image { height: 300px; }
-    .hero-section { padding: 30px 20px; }
+    .hero-section { padding-top: 30px; padding-bottom: 30px; }
     .specialty-card, .service-card, .event-card, .news-card, .info-card, .partner-card { padding: 24px; }
-    .hero-btn, .btn-white, .btn-primary, .btn-outline, .submit-btn { width: 100%; text-align: center; }
+    .info-card,
+    .specialty-card {
+        align-items: flex-start;
+    }
+
+    .hero-btn, .btn-white, .btn-primary, .btn-outline, .submit-btn {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .filter-section {
+        justify-content: stretch;
+    }
+
+    .filter-btn {
+        flex: 1 1 100%;
+        justify-content: center;
+        margin: 0;
+    }
+
+    .contact-form-section,
+    .map-section,
+    .hours-section,
+    .specialization-section,
+    .why-choose-section,
+    .cta-section,
+    .stats-section {
+        padding: 32px 20px;
+    }
+
     footer p, footer a { font-size: 14px; }
 }
 
 @media (max-width: 480px) {
+    .nav {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
     nav a { flex: 1 1 100%; }
     .page-header h1, .hero-title { font-size: 28px; }
     .page-header .tagline, .section-title, .about-content h2, .feature-content h3,
     .event-card h3, .news-card h3 { font-size: 22px; }
     .page-header { padding: 60px 20px; }
-    .hero-section { padding: 24px 16px; }
+    .container,
+    .hero-section,
+    .about-section,
+    .specialties-section,
+    .features-section,
+    main.grid-container {
+        width: min(100% - 24px, 1200px);
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .hero-section { padding-top: 24px; padding-bottom: 24px; }
+
     .specialties-grid, .services-grid, .events-grid, .news-grid,
     .partner-grid, .mvv-grid, .hours-grid, .commitment-grid, .spec-grid { gap: 20px; }
+
+    .specialty-card,
+    .info-card {
+        flex-direction: column;
+    }
+
+    .icon-container,
+    .service-icon {
+        min-width: 0;
+        max-width: 100%;
+        overflow-wrap: anywhere;
+    }
+
+    .grid-item img {
+        height: 220px;
+        object-fit: cover;
+    }
+
+    .stat-number {
+        font-size: 42px;
+    }
+
+    .map-placeholder {
+        height: 260px;
+        font-size: 56px;
+    }
 }
 
 @media print {
