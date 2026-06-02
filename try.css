@@ -2439,6 +2439,17 @@ main.grid-container {
     width: 100%;
 }
 
+input[type="file"],
+input[type="reset"] {
+    max-width: 100%;
+}
+
+video {
+    display: block;
+    width: min(100% - 32px, 900px);
+    margin: 40px auto;
+}
+
 .submit-btn {
     background: #1860a0;
     color: white;
@@ -2978,6 +2989,11 @@ main.grid-container {
         flex: 1 1 100%;
         justify-content: center;
         margin: 0;
+    }
+
+    .event-meta-row {
+        flex-direction: column;
+        align-items: flex-start;
     }
 
     .contact-form-section,
